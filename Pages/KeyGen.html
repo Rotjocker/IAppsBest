@@ -153,7 +153,7 @@
         </div>
 
         <div class="form-container">
-            <h2>JSON данные</h2>
+            <h2>Терминал</h2>
             <pre id="jsonDataDisplay" class="key-display"></pre>
         </div>
     </div>
@@ -286,7 +286,7 @@
                     continue;
                 }
                 
-                appendToDisplay(`Login successful, token: ${clientToken}`);
+                appendToDisplay('Login successful, wait while the keys are generated...');
                 
                 for (let j = 0; j < 7; j++) {
                     if (await emulateProgress(clientToken)) {
@@ -305,13 +305,13 @@
                             appendToDisplay(`Points: ${result.points}`);
                             keys.push(key);
                         } else {
-                            appendToDisplay('Invalid key. Generating next key...');
+                            appendToDisplay('Generating next key...');
                         }
                     } else {
                         keys.push(key);
                     }
                 } else {
-                    appendToDisplay('Failed to generate key. Generating next key...');
+                    appendToDisplay('Generating next key...');
                 }
             }
 
