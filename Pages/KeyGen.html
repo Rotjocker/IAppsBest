@@ -248,7 +248,7 @@
             }
         }
 
-        async function generateKeys(clientToken) {
+        async function generateKey(clientToken) {
             if (DEBUG_MODE) {
                 return Math.random() < 0.5 ? 'BIKE-3YD-5ZA6-3VJA-Y77' : '';
             }
@@ -295,7 +295,7 @@
                     await sleep(EVENTS_DELAY);
                 }
                 
-                const key = await generateKeys(clientToken);
+                const key = await generateKey(clientToken);
                 if (key) {
                     appendToDisplay(`Generated key: ${key}`);
                     
