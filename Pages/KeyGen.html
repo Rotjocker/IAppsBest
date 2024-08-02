@@ -257,7 +257,7 @@
                 const response = await fetch('https://api.gamepromo.io/promo/create-code', {
                     method: 'POST',
                     headers: {
-                        'Authorization': Bearer ${clientToken},
+                        'Authorization': `Bearer ${clientToken}`,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ promoId: PROMO_ID })
