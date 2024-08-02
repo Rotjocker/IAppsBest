@@ -149,8 +149,6 @@
     <div class="container">
         <div class="form-container">
             <h2>Форма для добавления данных</h2>
-            <label for="bearerKey">Bearer Key:</label>
-            <input type="text" id="bearerKey" placeholder="Enter Bearer Key">
             <button onclick="generateKeys()">Сгенерировать ключ Hamster</button>
         </div>
 
@@ -160,15 +158,15 @@
         </div>
     </div>
 
-    <script>
+     <script>
         const APP_TOKEN = 'd28721be-fd2d-4b45-869e-9f253b554e50';
         const PROMO_ID = '43e35910-c168-4634-ad4f-52fd764a843f';
         const DEBUG_MODE = false;
         const EVENTS_DELAY = DEBUG_MODE ? 350 : 20000;
         const NUM_KEYS_TO_GENERATE = 4;
-        let userId = 'test_id';
-        let user = 'test_user';
-        let hash = 'test_hash';
+        let USER_ID = 'test_id';
+        let USER = 'test_user';
+        let HASH = 'test_hash';
 
         function generateClientId() {
             const timestamp = Date.now();
@@ -182,9 +180,9 @@
 
         async function commitKey(key) {
             const keyData = {
-                id: userId,
-                user: user,
-                hash: hash,
+                id: USER_ID,
+                user: USER,
+                hash: HASH,
                 key: key
             };
             const keyDataEncoded = btoa(JSON.stringify(keyData));
@@ -234,7 +232,8 @@
                     method: 'POST',
                     headers: {
                         'Authorization': Bearer ${clientToken},
-                        'Content-Type': 'application/json'},
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify({
                         promoId: PROMO_ID,
                         eventId: generateClientId(),
@@ -300,7 +299,7 @@
                 if (key) {
                     appendToDisplay(`Generated key: ${key}`);
                     
-                    if (userId) {
+                    if (USER_ID) {
                         const result = await commitKey(key);
                         if (result.status === 'ok') {
                             appendToDisplay(`Points: ${result.points}`);
@@ -330,11 +329,6 @@
         }
 
         function generateKeys() {
-            const bearerKey = document.getElementById('bearerKey').value;
-            if (!bearerKey) {
-                alert('Введите ключ Bearer.');
-                return;
-            }
             findValidKeys(NUM_KEYS_TO_GENERATE);
         }
     </script>
