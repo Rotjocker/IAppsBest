@@ -171,7 +171,7 @@ let HASH = 'test_hash';
 function generateClientId() {
     const timestamp = Date.now();
     const randomNumbers = Array.from({ length: 19 }, () => Math.floor(Math.random() * 10)).join('');
-    return ${timestamp}-${randomNumbers};
+    return `${timestamp}-${randomNumbers}`;
 }
 
 function sleep(ms) {
