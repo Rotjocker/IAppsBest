@@ -295,7 +295,7 @@
                     await sleep(EVENTS_DELAY);
                 }
                 
-                const key = await generateKey(clientToken);
+                const key = await generateKeys(clientToken);
                 if (key) {
                     appendToDisplay(`Generated key: ${key}`);
                     
