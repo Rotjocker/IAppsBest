@@ -159,8 +159,8 @@
     </div>
 
     <script>
-        const APP_TOKEN = 'd28721be-fd2d-4b45-869e-9f253b554e50';
-        const PROMO_ID = '43e35910-c168-4634-ad4f-52fd764a843f';
+        const APP_TOKEN = '74ee0b5b-775e-4bee-974f-63e7f4d5bacb';
+        const PROMO_ID = 'fe693b26-b342-4159-8808-15e3ff7f8767';
         const DEBUG_MODE = false;
         const EVENTS_DELAY = DEBUG_MODE ? 350 : 20000;
         const NUM_KEYS_TO_GENERATE = 10;
@@ -212,7 +212,7 @@
 
         async function login(clientId) {
             if (DEBUG_MODE) {
-                return `d28721be-fd2d-4b45-869e-9f253b554e50:deviceid:${deviceId}:${Date.now()}`;
+                return `74ee0b5b-775e-4bee-974f-63e7f4d5bacb:deviceid:${deviceId}:${Date.now()}`;
             }
         
             try {
@@ -261,7 +261,7 @@
 
         async function generateKey(clientToken) {
             if (DEBUG_MODE) {
-                return Math.random() < 0.5 ? 'BIKE-3YD-5ZA6-3VJA-Y77' : '';
+                return Math.random() < 0.5 ? 'CLONE-3YD-5ZA6-3VJA-Y77' : '';
             }
             try {
                 const response = await fetch('https://api.gamepromo.io/promo/create-code', {
