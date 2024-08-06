@@ -10,14 +10,12 @@
             background-color: #f0f0f0;
             padding: 20px;
         }
-
         .container {
             display: flex;
             justify-content: space-between;
             max-width: 1000px;
             margin: 0 auto;
         }
-
         .form-container {
             width: 48%;
             background-color: #fff;
@@ -27,21 +25,17 @@
             margin-bottom: 20px;
             overflow: auto;
         }
-
         .form-container h2 {
             margin-top: 0;
             margin-bottom: 10px;
             text-align: center;
         }
-
         .form-container > * {
             margin-bottom: 10px;
-        } 
-
+        }
         input[type="file"],
         input[type="text"],
         textarea,
-
         select {
             width: calc(100% - 22px);
             padding: 10px;
@@ -49,8 +43,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
-        }  
-
+        }
         select {
             appearance: none;
             -webkit-appearance: none;
@@ -60,7 +53,6 @@
             background-position: right 8px center;
             background-size: 8px;
         }
-
         button {
             width: calc(100% - 22px);
             padding: 10px;
@@ -72,18 +64,15 @@
             margin-top: 10px;
             display: block;
         }
-
         button:hover {
             background-color: #0056b3;
         }
-
         .custom-file-upload {
             display: inline-block;
             position: relative;
             overflow: hidden;
             margin-top: 10px;
         }
-
         .custom-file-upload input[type="file"] {
             position: absolute;
             top: 0;
@@ -94,11 +83,9 @@
             cursor: pointer;
             opacity: 0;
         }
-
         label {
             display: block;
         }
-
         #jsonDataDisplay {
             white-space: pre;
             background-color: #f9f9f9;
@@ -110,25 +97,20 @@
             overflow-x: auto;
             max-height: 100px;
         }
-
         .json-key {
             color: red;
         }
-    
         .json-string {
             color: green;
         }
-
         .json-boolean {
             color: goldenrod;
         }
-
         @media screen and (min-width: 801px) {
             .container {
                 gap: 20px;
             }
         }
-        
         @media screen and (max-width: 800px) {
             .container {
                 flex-direction: column;
@@ -149,6 +131,11 @@
     <div class="container">
         <div class="form-container">
             <h2>Форма для генерации ключей</h2>
+            <label for="appSelect">Выберите приложение:</label>
+            <select id="appSelect" onchange="updateConstants()">
+                <option value="Bike">Bike</option>
+                <option value="Clone">Clone</option>
+            </select>
             <button onclick="generateKeys()">Сгенерировать ключ Hamster</button>
         </div>
 
@@ -159,15 +146,32 @@
     </div>
 
     <script>
-        const APP_TOKEN = '74ee0b5b-775e-4bee-974f-63e7f4d5bacb';
-        const PROMO_ID = 'fe693b26-b342-4159-8808-15e3ff7f8767';
+        const appConfigs = {
+            Bike: {
+                appToken: 'd28721be-fd2d-4b45-869e-9f253b554e50',
+                promoId: '43e35910-c168-4634-ad4f-52fd764a843f'
+            },
+            Clone: {
+                appToken: '74ee0b5b-775e-4bee-974f-63e7f4d5bacb',
+                promoId: 'fe693b26-b342-4159-8808-15e3ff7f8767'
+            }
+        };
+
+        let APP_TOKEN = appConfigs.Bike.appToken;
+        let PROMO_ID = appConfigs.Bike.promoId;
         const DEBUG_MODE = false;
         const EVENTS_DELAY = DEBUG_MODE ? 350 : 20000;
-        const NUM_KEYS_TO_GENERATE = 10;
+        const NUM_KEYS_TO_GENERATE = 4;
         let USER_ID = 'test_id';
         let USER = 'test_user';
         let HASH = 'test_hash';
         
+        function updateConstants() {
+            const selectedApp = document.getElementById('appSelect').value;
+            APP_TOKEN = appConfigs[selectedApp].appToken;
+            PROMO_ID = appConfigs[selectedApp].promoId;
+        }
+
         function generateClientId() {
             const timestamp = Date.now();
             const randomNumbers = Array.from({ length: 19 }, () => Math.floor(Math.random() * 10)).join('');
@@ -212,7 +216,7 @@
 
         async function login(clientId) {
             if (DEBUG_MODE) {
-                return `74ee0b5b-775e-4bee-974f-63e7f4d5bacb:deviceid:${deviceId}:${Date.now()}`;
+                return `${APP_TOKEN}:deviceid:${deviceId}:${Date.now()}`;
             }
         
             try {
