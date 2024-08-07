@@ -139,6 +139,7 @@
                 <option value="Train">Train Miner</option>
             </select>
             <button onclick="generateKeys()">Сгенерировать ключ Hamster</button>
+            <button onclick="copyKeys()">Скопировать полученные ключи</button>
         </div>
 
         <div class="form-container">
@@ -175,6 +176,7 @@
         let USER_ID = 'test_id';
         let USER = 'test_user';
         let HASH = 'test_hash';
+        let generatedKeys = [];
         
         function updateConstants() {
             const selectedApp = document.getElementById('appSelect').value;
@@ -343,6 +345,8 @@
             const keys = await Promise.all(keyPromises);
         
             const validKeys = keys.filter(key => key !== null);
+            generatedKeys = validKeys.slice(-4); // Keep the last 4 valid keys
+            
             if (validKeys.length > 0) {
                 appendToDisplay(`Valid keys found: ${validKeys.join(', ')}`);
             } else {
@@ -358,6 +362,19 @@
         
         function generateKeys() {
             findValidKeys(NUM_KEYS_TO_GENERATE);
+        }
+        
+        function copyKeys() {
+            if (generatedKeys.length > 0) {
+                const keysText = generatedKeys.join('\n');
+                navigator.clipboard.writeText(keysText).then(() => {
+                    alert('Keys copied to clipboard:\n' + keysText);
+                }).catch(err => {
+                    console.error('Error copying keys:', err);
+                });
+            } else {
+                alert('No keys to copy');
+            }
         }
     </script>
 </body>
