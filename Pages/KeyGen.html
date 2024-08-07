@@ -365,15 +365,22 @@
         }
         
         function copyKeys() {
-            if (generatedKeys.length > 0) {
-                const keysText = generatedKeys.join('\n');
+            const keyDisplay = document.getElementById('jsonDataDisplay').textContent;
+            const keyPattern = /Generated key:\s([A-Za-z0-9\-]+)/g;
+            const keys = [];
+            let match;
+            while ((match = keyPattern.exec(keyDisplay)) !== null) {
+                keys.push(match[1]);
+            }
+            if (keys.length > 0) {
+                const keysText = keys.join('\n');
                 navigator.clipboard.writeText(keysText).then(() => {
                     alert('Keys copied to clipboard:\n' + keysText);
                 }).catch(err => {
                     console.error('Error copying keys:', err);
                 });
             } else {
-                alert('No keys to copy');
+                alert('No keys to copy.');
             }
         }
     </script>
